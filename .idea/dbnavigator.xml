@@ -29,7 +29,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ac3208ce-3190-4a61-b36e-28054c43b340">
-      <console name="SOEN387" type="STANDARD" schema="mysql" session="Main" />
+      <console name="SOEN387" type="STANDARD" schema="mysql" session="Main"><![CDATA[select DOB From SOEN387.Users]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -37,6 +37,9 @@
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="ac3208ce-3190-4a61-b36e-28054c43b340" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="ac3208ce-3190-4a61-b36e-28054c43b340" dataset="SOEN387.Users" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -83,7 +86,7 @@
           <database value="mysql" />
           <type value="USER_PASSWORD" />
           <user value="root" />
-          <deprecated-pwd value="Tml1LTY2NzcyMA==" />
+          <deprecated-pwd value="cm9vdHBhc3N3b3Jk" />
         </database>
         <properties>
           <auto-commit value="false" />
@@ -109,7 +112,7 @@
           <session-management value="true" />
           <ddl-file-binding value="true" />
           <database-logging value="true" />
-          <connect-automatically value="true" />
+          <connect-automatically value="false" />
           <restore-workspace value="true" />
           <restore-workspace-deep value="false" />
           <environment-type value="default" />
