@@ -7,7 +7,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 
 import com.example.soen387.model.User;
-import com.example.soen387.dao.RegisterDao;
+import com.example.soen387.dao.UserDao;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
@@ -55,10 +55,10 @@ public class RegisterServlet extends HttpServlet {
         User user = new User(username,hashed_password,first_name,last_name,address,email,phone_number,DOB,user_type);
 
         // Create Data Access Object
-        RegisterDao registerDao = new RegisterDao();
+        UserDao userDao = new UserDao();
 
         // Insert User data into the database
-        String userRegistered = registerDao.registerUser(user);
+        String userRegistered = userDao.registerUser(user);
 
         if(userRegistered.equals("SUCCESS"))
         {

@@ -49,33 +49,6 @@ function validate_search_course() {
   }
 }
 
-function getSearchResults() {
-  let results = document.getElementById("search_results");
-  let searchVal = document.getElementById("search_course").value;
-
-  if (searchVal.length < 1) {
-    results.style.display = "none";
-    return;
-  }
-
-  //console.log('searchVal : ' + searchVal);
-  let xhr = new XMLHttpRequest();
-  let url = "search_results.php?search=" + searchVal;
-  // open function
-  xhr.open("GET", url, true);
-
-  xhr.onreadystatechange = function () {
-    if (xhr.readyState == 4 && xhr.status == 200) {
-      let text = xhr.responseText;
-      //console.log('response from: ' + xhr.responseText);
-      results.innerHTML = text;
-      results.style.display = "block";
-    }
-  };
-
-  xhr.send();
-}
-
 function validate_username() {
   let username = document.getElementById("username").value;
   if (/\s/g.test(username)) {
