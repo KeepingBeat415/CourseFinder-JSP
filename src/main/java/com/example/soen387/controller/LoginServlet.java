@@ -1,6 +1,6 @@
 package com.example.soen387.controller;
 
-import com.example.soen387.dao.LoginDao;
+import com.example.soen387.dao.UserDao;
 import com.example.soen387.model.User;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
         User login_user = new User(username, password);
 
         // Create Data Access Object
-        LoginDao loginDao = new LoginDao();
+        UserDao user = new UserDao();
 
         // Insert User data into the database
-        String login_result = loginDao.loginUser(login_user);
+        String login_result = user.loginUser(login_user);
 
         // Session
         HttpSession session = request.getSession();

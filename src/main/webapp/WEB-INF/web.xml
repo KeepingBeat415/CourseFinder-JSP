@@ -26,4 +26,13 @@
         <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>SearchCourseServlet</servlet-name>
+        <servlet-class>com.example.soen387.controller.SearchCourseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchCourseServlet</servlet-name>
+        <url-pattern>/SearchCourseServlet</url-pattern>
+    </servlet-mapping>
+
 </web-app>
