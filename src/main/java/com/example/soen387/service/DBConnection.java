@@ -9,7 +9,7 @@ public class DBConnection {
     static Connection conn = null;
 
     public static Connection getConnection() {
-
+        // Set MySQL Parameters for Connection
         String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         String DB_URL = "jdbc:mysql://localhost:3306/SOEN387";
         String DB_USER = "root";

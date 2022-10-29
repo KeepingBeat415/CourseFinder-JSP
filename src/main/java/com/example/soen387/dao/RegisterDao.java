@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.example.soen387.model.User;
 import com.example.soen387.service.DBConnection;
@@ -29,21 +28,17 @@ public class RegisterDao {
         try {
 
             conn = DBConnection.getConnection();
-
+            // Validate username whether exist
             String query_existed = "SELECT id FROM Users WHERE Users.username = ?";
-
+            // Prepared SQL Statement
             preparedStatement = conn.prepareStatement(query_existed);
             preparedStatement.setString(1, username);
             ResultSet rs = preparedStatement.executeQuery();
 
-//            Statement stmt = conn.createStatement();
-//            ResultSet rs = stmt.executeQuery(query_existed);
-            System.out.println(rs);
-
             if(rs.next()){
                 return "EXISTED";
             }
-
+            // Insert New User into Database
             String query = "INSERT INTO Users (username,password,first_name,last_name,address,email,phone_number,DOB,user_type) values (?,?,?,?,?,?,?,?,?)";
             preparedStatement = conn.prepareStatement(query);
 
@@ -67,7 +62,6 @@ public class RegisterDao {
         } catch(SQLException e) {
             e.printStackTrace();
         }
-
         return "ERROR";
     }
 

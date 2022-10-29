@@ -45,16 +45,16 @@
                     <form action="RegisterServlet" method="post">
                         <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
-                        <c:if test='${requestScope.success_msg != null}'>
-                            <c:out value='${requestScope.success_msg}' escapeXml="false"/>
+                        <c:if test="${requestScope.success_msg != null}">
+                            <c:out value="${requestScope.success_msg}" escapeXml="false"/>
                         </c:if>
 
                         <c:if test="${requestScope.exist_msg != null}">
                             <c:out value="${requestScope.exist_msg}" escapeXml="false"/>
                         </c:if>
 
-                        <c:if test='${requestScope.error_msg != null}'>
-                            <c:out value='${requestScope.error_msg}' escapeXml="false"/>
+                        <c:if test="${requestScope.error_msg != null}">
+                            <c:out value="${requestScope.error_msg}" escapeXml="false"/>
                         </c:if>
 
                         <div class="form-row">
