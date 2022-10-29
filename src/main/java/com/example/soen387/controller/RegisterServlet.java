@@ -23,7 +23,8 @@ public class RegisterServlet extends HttpServlet {
         // Input variables
         String username = request.getParameter("username");
         // Hash password
-        String password = BCrypt.hashpw(request.getParameter("password"), BCrypt.gensalt(12));
+        String password = request.getParameter("password");
+        String hashed_password = BCrypt.hashpw(password, BCrypt.gensalt(12));
         String first_name = request.getParameter("first_name");
         String last_name = request.getParameter("last_name");
         String address = request.getParameter("address");
@@ -51,7 +52,7 @@ public class RegisterServlet extends HttpServlet {
                 "</div>";
 
         // Create New User with input variables
-        User user = new User(username,password,first_name,last_name,address,email,phone_number,DOB,user_type);
+        User user = new User(username,hashed_password,first_name,last_name,address,email,phone_number,DOB,user_type);
 
         // Create Data Access Object
         RegisterDao registerDao = new RegisterDao();

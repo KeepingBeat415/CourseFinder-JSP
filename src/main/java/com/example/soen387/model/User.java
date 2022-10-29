@@ -2,6 +2,7 @@ package com.example.soen387.model;
 
 public class User {
 
+    private int id;
     private String username;
     private String password;
     private String first_name;
@@ -23,6 +24,14 @@ public class User {
         this.phone_number = phone_number;
         this.DOB = DOB;
         this.user_type = user_type;
+    }
+    public User(String username, String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getUsername() {
@@ -61,6 +70,9 @@ public class User {
         return user_type;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
     public void setUsername(String username) {
         this.username = username;
     }
