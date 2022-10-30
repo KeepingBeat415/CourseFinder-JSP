@@ -63,16 +63,16 @@ public class RegisterServlet extends HttpServlet {
         if(userRegistered.equals("SUCCESS"))
         {
             request.setAttribute("success_msg", success_msg);
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            request.getRequestDispatcher("view/register.jsp").forward(request, response);
         }
         else if (userRegistered.equals("EXISTED")){
             request.setAttribute("exist_msg", exist_msg);
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            request.getRequestDispatcher("view/register.jsp").forward(request, response);
         }
         else
         {
             request.setAttribute("error_msg", error_msg);
-            request.getRequestDispatcher("/register.jsp").forward(request, response);
+            request.getRequestDispatcher("view/register.jsp").forward(request, response);
         }
     }
 }

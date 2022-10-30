@@ -34,7 +34,7 @@ public class SearchCourseServlet extends HttpServlet {
 
         if(user_list.isEmpty()){
             request.setAttribute("student_not_existed", student_not_existed);
-            request.getRequestDispatcher("admin/admin_home.jsp").forward(request, response);
+            request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
         }
         else{
             String result = "<table class=\"table table-striped\">" +
@@ -59,7 +59,7 @@ public class SearchCourseServlet extends HttpServlet {
             result += "</table>";
 
             request.setAttribute("search_course", result);
-            request.getRequestDispatcher("admin/admin_home.jsp").forward(request, response);
+            request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
         }
 
     }

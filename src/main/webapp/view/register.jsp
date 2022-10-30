@@ -42,7 +42,7 @@
             <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
 
-                    <form action="RegisterServlet" method="post">
+                    <form action="<%= request.getContextPath() %>/RegisterServlet" method="post">
                         <p class="text-center h2 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign up</p>
 
                         <c:if test="${requestScope.success_msg != null}">
@@ -124,7 +124,7 @@
                         </div>
                     </form>
 
-                    <p style="padding: 15px 0 0 0;">Already have an account? <a href="index.jsp">Login here</a>.</p>
+                    <p style="padding: 15px 0 0 0;">Already have an account? <a href="${pageContext.request.contextPath}/view/index.jsp">Login here</a>.</p>
                 </div>
             </div>
         </div>

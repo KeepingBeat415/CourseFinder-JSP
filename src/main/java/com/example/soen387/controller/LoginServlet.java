@@ -42,15 +42,15 @@ public class LoginServlet extends HttpServlet {
         switch (login_result){
             case "username_err":
                 request.setAttribute("username_err", username_err);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("view/index.jsp").forward(request, response);
                 break;
             case "password_err":
                 request.setAttribute("password_err", password_err);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("view/index.jsp").forward(request, response);
                 break;
             case "admin":
                 session.setAttribute("username", username);
-                response.sendRedirect("admin/admin_home.jsp");
+                response.sendRedirect("view/admin/admin_home.jsp");
                 break;
 //            case "student":
 //                session.setAttribute("username",username);
@@ -58,7 +58,7 @@ public class LoginServlet extends HttpServlet {
 //                break;
             default:
                 request.setAttribute("error_msg", error_msg);
-                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                request.getRequestDispatcher("view/index.jsp").forward(request, response);
         }
 
     }
