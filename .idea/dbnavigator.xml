@@ -48,7 +48,11 @@ select * from SOEN387.`Enrolled_In`
 --insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 16)
 --insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 17)
 --insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 18)
---insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 15)]]></console>
+--insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 15)
+
+--SELECT Users.first_name, Users.last_name, Course.code, Course.title, Course.semester, Course.days, Course.time, Course.room FROM SOEN387.Course JOIN SOEN387.Enrolled_In ON Course.id = Enrolled_In.course_id JOIN SOEN387.Users ON Users.id = Enrolled_In.student_id WHERE Enrolled_In.student_id = '14'";
+
+SELECT first_name, last_name FROM SOEN387.Users WHERE id = 14 AND user_type = 'student']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

@@ -137,4 +137,35 @@ public class UserDao {
         }
         return user_list;
     }
+
+    public String searchStudent(String student_id){
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String search_result = "None";
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT first_name, last_name FROM Users WHERE id = ? AND user_type = 'student'";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, student_id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Search student info by id
+            if (rs.next()) {
+                search_result = rs.getString(1) + " " + rs.getString(2);
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            search_result = "ERROR";
+        }
+        return search_result;
+    }
 }
