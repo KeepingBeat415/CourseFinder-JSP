@@ -52,10 +52,10 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("username", username);
                 response.sendRedirect("admin/admin_home.jsp");
                 break;
-            case "student":
+//            case "student":
 //                session.setAttribute("username",username);
-//                response.sendRedirect("loginsuccess.jsp");
-                break;
+//                response.sendRedirect("student/student_home.jsp");
+//                break;
             default:
                 request.setAttribute("error_msg", error_msg);
                 request.getRequestDispatcher("/index.jsp").forward(request, response);

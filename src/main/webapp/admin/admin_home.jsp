@@ -8,17 +8,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-<%@include file="admin_header.jsp"%>>
+<%@include file="admin_header.jsp"%>
 
 <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="padding: 50px 50px 250px 50px;">
 
-        <form action="SearchCourseServlet" method="post">
+        <form action="<%= request.getContextPath() %>/SearchCourseServlet" method="post">
             <h3>Course Enrolled Students:</h3>
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <input type="search" class="form-control" name="course_code" placeholder="Search by Course Code..." id="search_course" onkeyup="validate_search_course(); getSearchResults()">
+                    <input type="search" class="form-control" name="course_code" placeholder="Search by Course Code..." id="search_course" onkeyup="validate_search_course()" required>
                 </div>
                 <div class="form-group col-md-4">
                     <button class="btn btn-primary" type="submit" name="search_course" id="search_course_submit">Submit</button>
@@ -29,19 +29,18 @@
                     <span id="invalidate_course_alert"></span>
                 </div>
             </div>
-<%--            <div class="form-row">--%>
-<%--                <div class="form-group col-md-8">--%>
-<%--                    <ul class="list-group list-group-flush" id="search_results"></ul>--%>
-<%--                </div>--%>
-<%--            </div>--%>
         </form>
 
-        <c:if test="${requestScope.password_err != null}">
-            <c:out value="${requestScope.password_err}" escapeXml="false"/>
+        <c:if test="${requestScope.course_not_existed != null}">
+            <c:out value="${requestScope.course_not_existed}" escapeXml="false"/>
         </c:if>
 
-        <c:if test="${requestScope.error_msg != null}">
-            <c:out value="${requestScope.error_msg}" escapeXml="false"/>
+        <c:if test="${requestScope.student_not_existed != null}">
+            <c:out value="${requestScope.student_not_existed}" escapeXml="false"/>
+        </c:if>
+
+        <c:if test="${requestScope.search_course != null}">
+            <c:out value="${requestScope.search_course}" escapeXml="false"/>
         </c:if>
 
     </div>

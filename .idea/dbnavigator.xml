@@ -29,7 +29,26 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="ac3208ce-3190-4a61-b36e-28054c43b340">
-      <console name="SOEN387" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * From SOEN387.Users]]></console>
+      <console name="SOEN387" type="STANDARD" schema="mysql" session="Main"><![CDATA[select * From SOEN387.Users
+select * from SOEN387.`Course`
+select * from SOEN387.`Enrolled_In`
+--delete From SOEN387.`Users` where id = '19'
+--SELECT password, user_type FROM SOEN387.Users WHERE Users.username = 'student'
+
+--INSERT INTO SOEN387.`Users` (username,password,first_name,last_name,address,email,phone_number,DOB,user_type) values ('student-2','$2a$12$JAIqJ8MHCYzeYhuMscAtN.MlIXaGUHOoVHbqQPbwJyWwJowBqU/g6','student','two','2 Student Street','student-2@gmail.com','514-111-0022','2022-10-10','student');
+--INSERT INTO SOEN387.`Users` (username,password,first_name,last_name,address,email,phone_number,DOB,user_type) values ('student-3','$2a$12$JAIqJ8MHCYzeYhuMscAtN.MlIXaGUHOoVHbqQPbwJyWwJowBqU/g6','student','three','3 Student Street','student-3@gmail.com','514-111-0033','2022-10-10','student');
+--INSERT INTO SOEN387.`Users` (username,password,first_name,last_name,address,email,phone_number,DOB,user_type) values ('student-4','$2a$12$JAIqJ8MHCYzeYhuMscAtN.MlIXaGUHOoVHbqQPbwJyWwJowBqU/g6','student','four','4 Student Street','student-4@gmail.com','514-111-0044','2022-10-10','student');
+--INSERT INTO SOEN387.`Users` (username,password,first_name,last_name,address,email,phone_number,DOB,user_type) values ('student-5','$2a$12$JAIqJ8MHCYzeYhuMscAtN.MlIXaGUHOoVHbqQPbwJyWwJowBqU/g6','student','five','5 Student Street','student-5@gmail.com','514-111-0055','2022-10-10','student');
+
+--INSERT INTO SOEN387.Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES ('COMP-101', 'Computer Programming 101', 'Fall 2022', 'MonTue', '8:00-9:15', 'Alex John', 'C101', '2022-09-05', '2022-12-08')
+--INSERT INTO SOEN387.Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES ('COMP-201', 'Computer Programming 201', 'Fall 2022', 'TueWed', '9:00-10:15', 'Bash Xie', 'C201', '2022-09-05', '2022-12-08')
+--INSERT INTO SOEN387.Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES ('COMP-301', 'Computer Programming 301', 'Fall 2022', 'WedThu', '10:00-11:15', 'Cathri Will', 'C301', '2022-09-05', '2022-12-08')
+--INSERT INTO SOEN387.Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES ('COMP-401', 'Computer Programming 401', 'Fall 2022', 'WedFir', '14:00-15:15', 'Den Ash', 'C401', '2022-09-05', '2022-12-08')
+
+--insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 16)
+--insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 17)
+--insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 18)
+--insert into SOEN387.`Enrolled_In` (course_id, student_id) value (1, 15)]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
@@ -89,7 +108,7 @@
           <deprecated-pwd value="cm9vdHBhc3N3b3Jk" />
         </database>
         <properties>
-          <auto-commit value="false" />
+          <auto-commit value="true" />
         </properties>
         <ssh-settings>
           <active value="false" />
@@ -492,7 +511,7 @@
         <uncommitted-changes>
           <on-project-close value="ASK" />
           <on-disconnect value="ASK" />
-          <on-autocommit-toggle value="ASK" />
+          <on-autocommit-toggle value="COMMIT" />
         </uncommitted-changes>
         <multiple-uncommitted-changes>
           <on-commit value="ASK" />
