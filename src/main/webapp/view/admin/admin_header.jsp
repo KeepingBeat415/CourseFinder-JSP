@@ -26,9 +26,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <!-- Custom styles for this template -->
-    <link href="../css/theme.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/view/css/theme.css" rel="stylesheet" />
 
-    <script type="text/javascript" src="../javascript/functions.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/view/javascript/functions.js"></script>
 
     <title>Administrator</title>
 </head>
@@ -39,9 +39,9 @@
     <div class="container">
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="admin_home.jsp">Home</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/view/admin/admin_home.jsp">Home</a></li>
                 <li><a href="">Course</a></li>
-                <li><a href="../logout.jsp">Logout</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/logout.jsp">Logout</a></li>
             </ul>
         </div>
         <!--/.nav-collapse -->

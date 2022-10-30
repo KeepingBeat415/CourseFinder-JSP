@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import com.example.soen387.model.User;
 import com.example.soen387.service.DBConnection;
@@ -107,4 +108,64 @@ public class UserDao {
         return result;
     }
 
+    public ArrayList<User> searchCourse(String course_code) {
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ArrayList<User> user_list = new ArrayList<>();
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT Users.id, Users.first_name, Users.last_name, Users.phone_number,Users.email FROM Users JOIN Enrolled_In ON Users.id = Enrolled_In.student_id JOIN Course ON Course.id = Enrolled_In.course_id WHERE BINARY Course.code = ?";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, course_code);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Add Search Enrolled Student's info into ArrayList
+            while (rs.next()) {
+                user_list.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user_list;
+    }
+
+    public String searchStudent(String student_id){
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        String search_result = "None";
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT first_name, last_name FROM Users WHERE id = ? AND user_type = 'student'";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, student_id);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Search student info by id
+            if (rs.next()) {
+                search_result = rs.getString(1) + " " + rs.getString(2);
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            search_result = "ERROR";
+        }
+        return search_result;
+    }
 }

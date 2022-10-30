@@ -25,12 +25,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
     <!-- Custom styles for this template -->
-    <link href="css/theme.css" rel="stylesheet" />
+    <link href="${pageContext.request.contextPath}/view/css/theme.css" rel="stylesheet" />
 
     <!-- Custom styles for this template -->
-    <link href="css/signin.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/view/css/signin.css" rel="stylesheet">
 
-    <script type="text/javascript" src="javascript/functions.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/view/javascript/functions.js"></script>
 
     <title>Login</title>
 </head>
@@ -39,7 +39,7 @@
 
 <div class="container">
 
-    <form class="form-signin" action="LoginServlet" method="post">
+    <form class="form-signin" action="<%= request.getContextPath() %>/LoginServlet" method="post">
         <h2 class="form-signin-heading">Sign in</h2>
 
         <c:if test="${requestScope.username_err != null}">
@@ -59,7 +59,7 @@
         <span id="exist_space_alert"></span>
         <label class="sr-only" for="password">Password</label>
         <input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
-        <p>Don't have an account? <a href="register.jsp">Sign up now</a>.</p>
+        <p>Don't have an account? <a href="${pageContext.request.contextPath}/view/register.jsp">Sign up now</a>.</p>
         <button class="btn btn-lg btn-primary btn-block" type="submit" id="submit">Sign in</button>
     </form>
 

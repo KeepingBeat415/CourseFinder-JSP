@@ -5,7 +5,7 @@
          version="5.0">
 
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>view/index.jsp</welcome-file>
     </welcome-file-list>
 
     <servlet>
@@ -24,15 +24,6 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>SearchCourseServlet</servlet-name>
-        <servlet-class>com.example.soen387.controller.SearchCourseServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>SearchCourseServlet</servlet-name>
-        <url-pattern>/SearchCourseServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>
