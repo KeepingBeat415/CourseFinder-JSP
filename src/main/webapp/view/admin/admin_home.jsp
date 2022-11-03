@@ -35,8 +35,8 @@
             <c:out value="${requestScope.course_not_existed}" escapeXml="false"/>
         </c:if>
 
-        <c:if test="${requestScope.student_not_existed != null}">
-            <c:out value="${requestScope.student_not_existed}" escapeXml="false"/>
+        <c:if test="${requestScope.student_not_enrolled != null}">
+            <c:out value="${requestScope.student_not_enrolled}" escapeXml="false"/>
         </c:if>
 
         <c:if test="${requestScope.search_course != null}">

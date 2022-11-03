@@ -44,6 +44,7 @@
 
         <c:if test="${requestScope.username_err != null}">
             <c:out value="${requestScope.username_err}" escapeXml="false"/>
+<%--            <%= request.getAttribute("username_err") %>--%>
         </c:if>
 
         <c:if test="${requestScope.password_err != null}">

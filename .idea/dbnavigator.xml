@@ -52,7 +52,9 @@ select * from SOEN387.`Enrolled_In`
 
 --SELECT Users.first_name, Users.last_name, Course.code, Course.title, Course.semester, Course.days, Course.time, Course.room FROM SOEN387.Course JOIN SOEN387.Enrolled_In ON Course.id = Enrolled_In.course_id JOIN SOEN387.Users ON Users.id = Enrolled_In.student_id WHERE Enrolled_In.student_id = '14'";
 
-SELECT first_name, last_name FROM SOEN387.Users WHERE id = 14 AND user_type = 'student']]></console>
+SELECT first_name, last_name FROM SOEN387.Users WHERE id = 14 AND user_type = 'student'
+
+SELECT * FROM SOEN387.Course WHERE code = 'COMP-101']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">

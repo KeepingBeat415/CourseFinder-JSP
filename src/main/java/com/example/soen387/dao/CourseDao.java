@@ -11,6 +11,36 @@ import java.util.ArrayList;
 
 public class CourseDao {
 
+    public boolean isCourseExisted(String course_code){
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        boolean result = false;
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT * FROM Course WHERE code = ?";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, course_code);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Add Search Enrolled Course by student ID
+            if (rs.next()) {
+               result = true;
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public ArrayList<Course> searchStudentEnrolledCourse(String student_id) {
 
         Connection conn = null;
