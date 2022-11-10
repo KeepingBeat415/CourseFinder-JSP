@@ -1,17 +1,23 @@
-<?php include 'admin_header.php' ?>
-<?php include 'course_service.php' ?>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+
+<%@include file="admin_header.jsp"%>
 
 <html>
 
 <body>
   <div class="container-fluid">
     <h2>Create Course</h2>
-    <?php
-    if (!empty($successful)) {
-      echo "<div class=\"alert alert-success\" role=\"alert\">$successful</div>";
-    }
-    ?>
-    <form action="course_create.php" name="courseForm" onsubmit="return validateForm()" method="POST">
+
+    <c:if test="${requestScope.success_msg != null}">
+      <c:out value="${requestScope.success_msg}" escapeXml="false"/>
+    </c:if>
+
+    <c:if test="${requestScope.error_msg != null}">
+      <c:out value="${requestScope.error_msg}" escapeXml="false"/>
+    </c:if>
+
+    <form action="<%= request.getContextPath()%>/CreateCourseServlet" name="courseForm" onsubmit="return validateForm()" method="POST">
       <div class="form-group">
         <label>Course Code</label>
         <input type="text" name="code" class="form-control" required>

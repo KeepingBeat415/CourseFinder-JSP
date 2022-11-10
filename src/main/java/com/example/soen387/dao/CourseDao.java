@@ -51,7 +51,7 @@ public class CourseDao {
 
             conn = DBConnection.getConnection();
 
-            String query = "SELECT Course.code, Course.title, Course.semester, Course.days, Course.time, Course.room FROM Course JOIN Enrolled_In ON Course.id = Enrolled_In.course_id WHERE Enrolled_In.student_id = ? ";
+            String query = "SELECT Course.code, Course.title, Course.semester, Course.days, Course.time, Course.instructor, Course.room FROM Course JOIN Enrolled_In ON Course.id = Enrolled_In.course_id WHERE Enrolled_In.student_id = ? ";
             // Prepared SQL Statement
             preparedStatement = conn.prepareStatement(query);
             preparedStatement.setString(1, student_id);
@@ -60,7 +60,7 @@ public class CourseDao {
 
             // Add Search Enrolled Course by student ID
             while (rs.next()) {
-                course_list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+                course_list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
 
             DBConnection.closeConnection();
@@ -69,5 +69,39 @@ public class CourseDao {
             e.printStackTrace();
         }
         return course_list;
+    }
+
+    public boolean createCourse(Course course) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            conn = DBConnection.getConnection();
+
+            String query = "INSERT INTO Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, course.getCode());
+            preparedStatement.setString(2, course.getTitle());
+            preparedStatement.setString(3, course.getSemester());
+            preparedStatement.setString(4, course.getDays());
+            preparedStatement.setString(5, course.getTime());
+            preparedStatement.setString(6, course.getInstructor());
+            preparedStatement.setString(7, course.getRoom());
+            preparedStatement.setString(8, course.getStart_date());
+            preparedStatement.setString(9, course.getEnd_date());
+
+            int count = preparedStatement.executeUpdate();
+
+            if (count != 0) {
+                return true;
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

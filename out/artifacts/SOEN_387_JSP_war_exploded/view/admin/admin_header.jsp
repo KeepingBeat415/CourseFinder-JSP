@@ -40,7 +40,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/view/admin/admin_home.jsp">Home</a></li>
-                <li><a href="">Course</a></li>
+                <li><a href="${pageContext.request.contextPath}/view/admin/course_create.jsp">Course</a></li>
                 <li><a href="${pageContext.request.contextPath}/view/logout.jsp">Logout</a></li>
             </ul>
         </div>
