@@ -53,7 +53,7 @@
                         <td class="text-center">${course.code}</td>
                         <td class="text-center">${course.title}</td>
                         <td class="text-center">${course.semester}</td>
-                        <td class="text-center"><a href="${pageContext.request.contextPath}/delete_course?course_id=${course.id}&course_date=${course.start_date}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td class="text-center"><a href="${pageContext.request.contextPath}/delete_course?course_id=${course.id}" class="btn btn-danger btn-sm">Delete</a></td>
                     </tr>
                 </c:forEach>
                 </tbody>

@@ -54,7 +54,7 @@ public class LoginServlet extends HttpServlet {
                 break;
             case "student":
                 session.setAttribute("username",username);
-                response.sendRedirect("/student_home");
+                response.sendRedirect(request.getContextPath() + "/student_home");
                 break;
             default:
                 request.setAttribute("error_msg", error_msg);
