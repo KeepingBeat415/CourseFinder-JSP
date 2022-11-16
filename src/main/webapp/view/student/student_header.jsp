@@ -39,7 +39,7 @@
   <div class="container">
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="${pageContext.request.contextPath}/view/student/student_home.jsp">Home</a></li>
+        <li class="active"><a href="${pageContext.request.contextPath}/student_home">Home</a></li>
         <li><a href="${pageContext.request.contextPath}/view/logout.jsp">Logout</a></li>
       </ul>
     </div>

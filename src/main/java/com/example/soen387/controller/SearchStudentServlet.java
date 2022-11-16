@@ -49,7 +49,6 @@ public class SearchStudentServlet extends HttpServlet {
 
             String student_name = "<h4> Name: " + search_student_result + "</h4>";
             request.setAttribute("student_name", student_name);
-
             CourseDao courseDao = new CourseDao();
             // Student enrolled course list
             ArrayList<Course> course_list = courseDao.searchStudentEnrolledCourse(student_id);

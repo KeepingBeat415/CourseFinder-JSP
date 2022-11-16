@@ -12,6 +12,28 @@ public class Course {
     private String start_date;
     private String end_date;
 
+
+    //For add and delete purpose
+    public Course(int id, String code, String title, String semester, String days, String time, String instructor, String room) {
+        this.id = id;
+        this.code = code;
+        this.title = title;
+        this.semester = semester;
+        this.days = days;
+        this.time = time;
+        this.instructor = instructor;
+        this.room = room;
+
+        String year = semester.substring(semester.length() - 4);
+        if (semester.contains("Fall")) {
+            setStart_date(year + "-09-05");
+            setEnd_date(year + "-12-22");
+        } else if (semester.contains("Winter")) {
+            setStart_date(year + "-01-08");
+            setEnd_date(year + "-04-30");
+        }
+    }
+
     // Search Student's Enrolled Course Info
     public Course(String code, String title, String semester, String days, String time, String instructor, String room){
         this.code = code;
