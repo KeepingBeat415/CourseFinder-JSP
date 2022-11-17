@@ -2,13 +2,15 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-/src/main/java/com/example/soen387/service/DBConnection.java
+**/soen387/service/DBConnection.java
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
 .idea/compiler.xml
 .idea/libraries/
+.idea/runConfigurations.xml
+out/artifacts/
 *.iws
 *.iml
 *.ipr
