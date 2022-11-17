@@ -44,7 +44,14 @@
                         <td class="text-center">${course.code}</td>
                         <td class="text-center">${course.title}</td>
                         <td class="text-center">${course.semester}</td>
-                        <td class="text-center"><a href="${pageContext.request.contextPath}/add_course?course_id=${course.id}" class="btn btn-primary btn-sm">Add</a></td>
+                        <td class="text-center">
+                            <form action=${pageContext.request.contextPath}/add_course method="post">
+                                <input type="hidden" name="course_id" value=${course.id}>
+                                <input type="hidden" name="course_end_date" value=${course.start_date}>
+                                <button
+                                        class="btn btn-primary btn-sm">Add
+                                </button>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>

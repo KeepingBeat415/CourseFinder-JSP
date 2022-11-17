@@ -14,18 +14,13 @@ import java.io.IOException;
 public class AddCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String add_success = "<div class='form-row'>" +
-                "<div class='form-group col-md-12'>" +
-                "<div class='alert alert-success' role='alert' style='text-align: center;'>Course created successfully.</div>" +
-                "</div>" +
-                "</div>";
-        ;
-        String add_error = "<div class='form-row'>" +
-                "<div class='form-group col-md-12'>" +
-                "<div class='alert alert-danger' role='alert' style='text-align: center;'>Oops! Something went wrong. Please try again later.</div>" +
-                "</div>" +
-                "</div>";
 
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String result = "";
         HttpSession session = request.getSession();
         response.setContentType("text/html");
         String username = (String) session.getAttribute("username");
@@ -34,17 +29,12 @@ public class AddCourseServlet extends HttpServlet {
         System.out.println(course_id);
         StudentDao studentDao = new StudentDao();
         if (studentDao.addCourse(username, course_id)) {
-            request.setAttribute("add_success", add_success);
+            result = "add_true";
         } else {
-            request.setAttribute("add_error", add_error);
+            result = "add_false";
         }
-        request.getRequestDispatcher("/student_home").forward(request, response);
 
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        response.sendRedirect(request.getContextPath() + "/student_home?message="+result);
 
 
     }

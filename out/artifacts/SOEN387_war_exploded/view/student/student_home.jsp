@@ -38,6 +38,7 @@
         </c:if>
 
         <div class="form-row">
+
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -53,12 +54,24 @@
                         <td class="text-center">${course.code}</td>
                         <td class="text-center">${course.title}</td>
                         <td class="text-center">${course.semester}</td>
-                        <td class="text-center"><a href="${pageContext.request.contextPath}/delete_course?course_id=${course.id}" class="btn btn-danger btn-sm">Delete</a></td>
+                        <td class="text-center">
+                            <form action=${pageContext.request.contextPath}/delete_course method="post">
+                                <input type="hidden" name="course_id" value=${course.id}>
+                                <input type="hidden" name="course_end_date" value=${course.end_date}>
+
+                                <button
+                                        class="btn btn-danger btn-sm">Delete
+                                </button>
+
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
 
             </table>
+
+
             <div class="form-group col-md-4">
                 <form action=${pageContext.request.contextPath}/available_course>
                     <button class="btn btn-primary" type="submit" name="add_course" id="add_course">Add Course</button>
