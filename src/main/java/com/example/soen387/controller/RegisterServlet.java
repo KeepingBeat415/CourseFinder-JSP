@@ -5,6 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.example.soen387.model.User;
 import com.example.soen387.dao.UserDao;
@@ -12,6 +13,9 @@ import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+
+    ReentrantLock register_lock = new ReentrantLock();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -57,8 +61,16 @@ public class RegisterServlet extends HttpServlet {
         // Create Data Access Object
         UserDao userDao = new UserDao();
 
-        // Insert User data into the database
-        String userRegistered = userDao.registerUser(user);
+        register_lock.lock();
+        String userRegistered = "";
+
+        try{
+            // Insert User data into the database
+            userRegistered = userDao.registerUser(user);
+        }
+        finally {
+            register_lock.unlock();
+        }
 
         if(userRegistered.equals("SUCCESS"))
         {

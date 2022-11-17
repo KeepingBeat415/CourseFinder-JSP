@@ -17,7 +17,6 @@ public class DBConnection {
 
         try{
             Class.forName(JDBC_DRIVER);
-//            conn  = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
             conn  = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
             return conn;
         } catch (SQLException e) {
