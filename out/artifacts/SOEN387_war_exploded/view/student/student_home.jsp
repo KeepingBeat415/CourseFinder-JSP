@@ -56,9 +56,8 @@
                         <td class="text-center">${course.semester}</td>
                         <td class="text-center">
                             <form action=${pageContext.request.contextPath}/delete_course method="post">
-                                <input type="hidden" name="course_id" value=${course.id}&course_date=${course.start_date}>
+                                <input type="hidden" name="course_id" value=${course.id}>
                                 <input type="hidden" name="course_end_date" value=${course.end_date}>
-
                                 <button
                                         class="btn btn-danger btn-sm">Delete
                                 </button>
