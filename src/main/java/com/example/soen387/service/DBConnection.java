@@ -13,11 +13,10 @@ public class DBConnection {
         String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
         String DB_URL = "jdbc:mysql://localhost:3306/SOEN387";
         String DB_USER = "root";
-        String DB_PASSWORD = "";
+        String DB_PASSWORD = "rootpassword";
 
         try{
             Class.forName(JDBC_DRIVER);
-//            conn  = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
             conn  = DriverManager.getConnection(DB_URL,DB_USER,DB_PASSWORD);
             return conn;
         } catch (SQLException e) {
