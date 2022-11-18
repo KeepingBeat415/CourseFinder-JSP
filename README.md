@@ -1,6 +1,6 @@
 ### The Use-Case Diagram
 
-![Login](src/images/use-case.png)
+![Login](src/images/use-case.jpg)
 
 ### The Class Diagram
 
@@ -8,4 +8,4 @@
 
 ### The Entity Relationship Model Diagram
 
-![Login](src/images/ERM.png)
+![Login](src/images/ERM.jpg)
