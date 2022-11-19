@@ -19,15 +19,6 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron" style="padding: 50px 50px 250px 50px;">
         <h3>Student Home Page</h3>
-
-        <c:if test="${requestScope.success_msg != null}">
-            <c:out value="${requestScope.success_msg}" escapeXml="false"/>
-        </c:if>
-
-        <c:if test="${requestScope.error_msg != null}">
-            <c:out value="${requestScope.error_msg}" escapeXml="false"/>
-        </c:if>
-
         <div class="form-row">
             <table class="table table-striped">
                 <thead>
