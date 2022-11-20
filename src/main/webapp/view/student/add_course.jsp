@@ -38,10 +38,11 @@
                         <td class="text-center">
                             <form action=${pageContext.request.contextPath}/add_course method="post">
                                 <input type="hidden" name="course_id" value=${course.id}>
-                                <input type="hidden" name="course_end_date" value=${course.start_date}>
+                                <input type="hidden" name="course_start_date" value=${course.start_date}>
                                 <button
                                         class="btn btn-primary btn-sm">Add
                                 </button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>

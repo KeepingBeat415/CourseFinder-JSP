@@ -29,6 +29,10 @@
             <c:out value="${requestScope.add_error}" escapeXml="false"/>
         </c:if>
 
+        <c:if test="${requestScope.deadline != null}">
+            <c:out value="${requestScope.deadline}" escapeXml="false"/>
+        </c:if>
+
         <c:if test="${requestScope.delete_success != null}">
             <c:out value="${requestScope.delete_success}" escapeXml="false"/>
         </c:if>
@@ -36,6 +40,7 @@
         <c:if test="${requestScope.delete_error != null}">
             <c:out value="${requestScope.delete_error}" escapeXml="false"/>
         </c:if>
+
 
         <div class="form-row">
 
@@ -70,12 +75,13 @@
 
             </table>
 
-
+            <% if (registered_course.size() < 5) {%>
             <div class="form-group col-md-4">
                 <form action=${pageContext.request.contextPath}/available_course>
                     <button class="btn btn-primary" type="submit" name="add_course" id="add_course">Add Course</button>
                 </form>
             </div>
+            <% } %>
         </div>
     </div>
 </div>

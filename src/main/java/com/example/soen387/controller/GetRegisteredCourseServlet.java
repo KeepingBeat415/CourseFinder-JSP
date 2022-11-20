@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 
-@WebServlet(name = "GetRegisteredCourseServlet", urlPatterns = {"/student_home?message=delete_true", "/student_home?message=delete_false", "/student_home?message=add_true", "/student_home?message=add_false", "/student_home"})
+@WebServlet(name = "GetRegisteredCourseServlet", urlPatterns = {"/student_home?message=delete_true", "/student_home?message=delete_false", "/student_home?message=add_true", "/student_home?message=add_false", "/student_home?message=deadline", "/student_home"})
 public class GetRegisteredCourseServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,6 +27,12 @@ public class GetRegisteredCourseServlet extends HttpServlet {
         String add_error = "<div class='form-row'>" +
                 "<div class='form-group col-md-12'>" +
                 "<div class='alert alert-danger' role='alert' style='text-align: center;'>Oops! Something went wrong. Please try again later.</div>" +
+                "</div>" +
+                "</div>";
+
+        String deadline = "<div class='form-row'>" +
+                "<div class='form-group col-md-12'>" +
+                "<div class='alert alert-danger' role='alert' style='text-align: center;'>The deadline has passed.</div>" +
                 "</div>" +
                 "</div>";
 
@@ -56,13 +62,15 @@ public class GetRegisteredCourseServlet extends HttpServlet {
                 case "add_false":
                     request.setAttribute("add_error", add_error);
                     break;
+                case "deadline":
+                    request.setAttribute("deadline", deadline);
+                    break;
             }
         }
 
         HttpSession session = request.getSession();
         response.setContentType("text/html");
         String username = (String) session.getAttribute("username");
-        System.out.println(username);
         StudentDao studentDao = new StudentDao();
         ArrayList<Course> registered_course = studentDao.registeredCourse(username);
         request.setAttribute("registered_course", registered_course);
