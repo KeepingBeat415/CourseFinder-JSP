@@ -50,6 +50,8 @@
                     <th class="text-center">Code</th>
                     <th class="text-center">Title</th>
                     <th class="text-center">Semester</th>
+                    <th class="text-center">Schedule</th>
+                    <th class="text-center">Location</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -59,6 +61,9 @@
                         <td class="text-center">${course.code}</td>
                         <td class="text-center">${course.title}</td>
                         <td class="text-center">${course.semester}</td>
+                        <td class="text-center">${course.days} - ${course.time}</td>
+                        <td class="text-center">${course.room}</td>
+
                         <td class="text-center">
                             <form action=${pageContext.request.contextPath}/delete_course method="post">
                                 <input type="hidden" name="course_id" value=${course.id}>
