@@ -71,6 +71,36 @@ public class CourseDao {
         return course_list;
     }
 
+    public ArrayList<Course> searchCourseByCode(String code) {
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+        ArrayList<Course> course_list = new ArrayList<>();
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "SELECT code, title, semester, days, Course.time, instructor, room, start_date, end_date FROM Course WHERE  code = ? ";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, code);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Add Search Enrolled Course by student ID
+            while (rs.next()) {
+                course_list.add(new Course(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9)));
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return course_list;
+    }
+
     public boolean createCourse(Course course) {
         Connection conn = null;
         PreparedStatement preparedStatement = null;

@@ -58,7 +58,9 @@ SELECT * FROM SOEN387.Course WHERE code = 'COMP-101'
 
 SELECT first_name, last_name, address, email, phone_number, DOB, user_type FROM SOEN387.Users WHERE username = 'admin'
 
-DELETE FROM SOEN387.`Users` WHERE username = 'admin-16']]></console>
+DELETE FROM SOEN387.`Users` WHERE username = 'admin-16'
+
+SELECT code, title, semester, days, Course.time, instructor, room, start_date, end_date FROM SOEN387.Course WHERE code = 'COMP-101']]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
