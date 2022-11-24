@@ -1,7 +1,8 @@
 package com.example.soen387.controller;
 
-import com.example.soen387.dao.UserDao;
-import com.example.soen387.model.User;
+import com.example.soen387.dao.PersonDao;
+import com.example.soen387.model.Person;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -28,13 +29,13 @@ public class LoginServlet extends HttpServlet {
         String error_msg = "<div class=\"alert alert-danger\" role=\"alert\">Oops! Something went wrong.</div>";
 
         // Create User with input variables
-        User login_user = new User(username, password);
+        Person login_user = new Person(username, password);
 
         // Create Data Access Object
-        UserDao user = new UserDao();
+        PersonDao personDao = new PersonDao();
 
         // Insert User data into the database
-        String login_result = user.loginUser(login_user);
+        String login_result = personDao.loginPerson(login_user);
 
         // Session
         HttpSession session = request.getSession();

@@ -1,9 +1,8 @@
 package com.example.soen387.controller;
 
 import com.example.soen387.dao.CourseDao;
-import com.example.soen387.dao.UserDao;
+import com.example.soen387.dao.PersonDao;
 import com.example.soen387.model.Course;
-import com.example.soen387.model.User;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -35,9 +34,9 @@ public class SearchStudentServlet extends HttpServlet {
                 "Oops! Something went wrong. Please try again later.</div>";
 
         // Create Data Access Object
-        UserDao userDao = new UserDao();
+        PersonDao personDao = new PersonDao();
 
-        String search_student_result = userDao.searchStudent(student_id);
+        String search_student_result = personDao.searchStudent(student_id);
 
         // Student ID invalided
         if(search_student_result.equals("None")){

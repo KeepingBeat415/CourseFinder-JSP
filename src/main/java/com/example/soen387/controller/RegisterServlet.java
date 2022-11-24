@@ -5,16 +5,13 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.concurrent.locks.ReentrantLock;
 
-import com.example.soen387.model.User;
-import com.example.soen387.dao.UserDao;
+import com.example.soen387.model.Administrator;
+import com.example.soen387.model.Student;
 import org.mindrot.jbcrypt.BCrypt;
 
 @WebServlet(name = "RegisterServlet", value = "/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-
-    ReentrantLock register_lock = new ReentrantLock();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -55,36 +52,31 @@ public class RegisterServlet extends HttpServlet {
                 "</div>" +
                 "</div>";
 
-        // Create New User with input variables
-        User user = new User(username,hashed_password,first_name,last_name,address,email,phone_number,DOB,user_type);
+        String personRegistered = "";
 
-        // Create Data Access Object
-        UserDao userDao = new UserDao();
-
-        register_lock.lock();
-        String userRegistered = "";
-
-        try{
-            // Insert User data into the database
-            userRegistered = userDao.registerUser(user);
-        }
-        finally {
-            register_lock.unlock();
+        switch (user_type){
+            case "admin":
+                Administrator admin = new Administrator(username,hashed_password,first_name,last_name,address,email,phone_number,DOB);
+                personRegistered = admin.createPerson();
+                break;
+            case "student":
+                Student student = new Student(username,hashed_password,first_name,last_name,address,email,phone_number,DOB);
+                personRegistered = student.createPerson();
+                break;
         }
 
-        if(userRegistered.equals("SUCCESS"))
-        {
-            request.setAttribute("success_msg", success_msg);
-            request.getRequestDispatcher("view/register.jsp").forward(request, response);
-        }
-        else if (userRegistered.equals("EXISTED")){
-            request.setAttribute("exist_msg", exist_msg);
-            request.getRequestDispatcher("view/register.jsp").forward(request, response);
-        }
-        else
-        {
-            request.setAttribute("error_msg", error_msg);
-            request.getRequestDispatcher("view/register.jsp").forward(request, response);
+        switch (personRegistered){
+            case "SUCCESS":
+                request.setAttribute("success_msg", success_msg);
+                request.getRequestDispatcher("view/register.jsp").forward(request, response);
+                break;
+            case "EXISTED":
+                request.setAttribute("exist_msg", exist_msg);
+                request.getRequestDispatcher("view/register.jsp").forward(request, response);
+                break;
+            default:
+                request.setAttribute("error_msg", error_msg);
+                request.getRequestDispatcher("view/register.jsp").forward(request, response);
         }
     }
 }
