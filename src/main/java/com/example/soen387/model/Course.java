@@ -18,7 +18,9 @@ public class Course {
     private String start_date;
     private String end_date;
 
-    ReentrantLock create_course_lock = new ReentrantLock();
+    private static final ReentrantLock create_course_lock = new ReentrantLock();
+    private static final CourseDao courseDao = new CourseDao();
+
 
     public Course(){
         this.id = -1;
@@ -170,9 +172,6 @@ public class Course {
 
     public boolean createCourse(){
 
-        // Create Data Access Object
-        CourseDao courseDao = new CourseDao();
-
         create_course_lock.lock();
         try{
             // Insert Course data into the database
@@ -184,8 +183,10 @@ public class Course {
     }
 
     public ArrayList<Course> searchCourseByCode(String code){
-        // Create Data Access Object
-        CourseDao courseDao = new CourseDao();
         return courseDao.searchCourseByCode(code);
+    }
+
+    public boolean isCourseExisted(String code){
+        return courseDao.isCourseExisted(code);
     }
 }

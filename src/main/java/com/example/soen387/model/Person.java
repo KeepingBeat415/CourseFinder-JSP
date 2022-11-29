@@ -26,6 +26,8 @@ public class Person {
     private String user_type;
 
     private static final ReentrantLock register_lock = new ReentrantLock();
+    // Create Data Access Object
+    private static final PersonDao personDao = new PersonDao();
 
     // Default Constructor
     public Person(){
@@ -138,10 +140,11 @@ public class Person {
         this.address = address;
     }
 
-    public String createPerson(){
+    public String loginPerson(){
+       return personDao.loginPerson(this);
+    }
 
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
+    public String createPerson(){
 
         register_lock.lock();
         String userRegistered = "";
@@ -157,20 +160,14 @@ public class Person {
     }
 
     public Person findByUsername(String username){
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
         return personDao.findPersonInfo(username);
     }
 
     public String updatePerson(){
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
         return personDao.updatePersonInfo(this);
     }
 
     public boolean deletePerson(String username){
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
         return personDao.deletePerson(username);
     }
 }

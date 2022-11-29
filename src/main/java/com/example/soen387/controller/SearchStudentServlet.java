@@ -3,6 +3,7 @@ package com.example.soen387.controller;
 import com.example.soen387.dao.CourseDao;
 import com.example.soen387.dao.PersonDao;
 import com.example.soen387.model.Course;
+import com.example.soen387.model.Student;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -33,56 +34,51 @@ public class SearchStudentServlet extends HttpServlet {
         String error_msg = "<div class=\"alert alert-secondary\" style=\"position: absolute; margin-top: 60px;\" role=\"alert\">" +
                 "Oops! Something went wrong. Please try again later.</div>";
 
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
+        Student student = new Student();
+        String search_student_result = student.searchStudent(student_id);
 
-        String search_student_result = personDao.searchStudent(student_id);
+        switch (search_student_result) {
+            case "None":
+                request.setAttribute("student_not_existed", student_not_existed);
+                break;
+            case "ERROR":
+                request.setAttribute("error_msg", error_msg);
+                break;
+            default:
+                String student_name = "<h4> Name: " + search_student_result + "</h4>";
+                request.setAttribute("student_name", student_name);
+                CourseDao courseDao = new CourseDao();
+                // Student enrolled course list
+                ArrayList<Course> course_list = courseDao.searchStudentEnrolledCourse(student_id);
 
-        // Student ID invalided
-        if(search_student_result.equals("None")){
-            request.setAttribute("student_not_existed", student_not_existed);
-        }// MySql Error
-        else if (search_student_result.equals("ERROR")) {
-            request.setAttribute("error_msg", error_msg);
-        }else{
-
-            String student_name = "<h4> Name: " + search_student_result + "</h4>";
-            request.setAttribute("student_name", student_name);
-            CourseDao courseDao = new CourseDao();
-            // Student enrolled course list
-            ArrayList<Course> course_list = courseDao.searchStudentEnrolledCourse(student_id);
-
-            if(course_list.isEmpty()){
-                request.setAttribute("student_not_enrolled", student_not_enrolled);
-                //request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
-            }
-            else {
-
-                result = "<table class=\"table table-striped\">" +
-                        "<thead>" +
-                        "<tr>" +
-                        "<th scope=\"col\">Course</th>" +
-                        "<th scope=\"col\">Title</th>" +
-                        "<th scope=\"col\">Semester</th>" +
-                        "<th scope=\"col\">Schedule</th>" +
-                        "<th scope=\"col\">Location</th>" +
-                        "</tr>" +
-                        "</thead>";
-
-                for (Course course : course_list) {
-                    result += "<tbody>" +
+                if (course_list.isEmpty()) {
+                    request.setAttribute("student_not_enrolled", student_not_enrolled);
+                } else {
+                    result = "<table class=\"table table-striped\">" +
+                            "<thead>" +
                             "<tr>" +
-                            "<td>" + course.getCode() + "</td>" +
-                            "<td>" + course.getTitle() + "</td>" +
-                            "<td>" + course.getSemester() + "</td>" +
-                            "<td>" + course.getDays() + "-" + course.getTime() + "</td>" +
-                            "<td>" + course.getRoom() + "</td>" +
+                            "<th scope=\"col\">Course</th>" +
+                            "<th scope=\"col\">Title</th>" +
+                            "<th scope=\"col\">Semester</th>" +
+                            "<th scope=\"col\">Schedule</th>" +
+                            "<th scope=\"col\">Location</th>" +
                             "</tr>" +
-                            "</tbody>";
+                            "</thead>";
+
+                    for (Course course : course_list) {
+                        result += "<tbody>" +
+                                "<tr>" +
+                                "<td>" + course.getCode() + "</td>" +
+                                "<td>" + course.getTitle() + "</td>" +
+                                "<td>" + course.getSemester() + "</td>" +
+                                "<td>" + course.getDays() + "-" + course.getTime() + "</td>" +
+                                "<td>" + course.getRoom() + "</td>" +
+                                "</tr>" +
+                                "</tbody>";
+                    }
+                    result += "</table>";
+                    request.setAttribute("result", result);
                 }
-                result += "</table>";
-                request.setAttribute("result", result);
-            }
         }
         request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
 

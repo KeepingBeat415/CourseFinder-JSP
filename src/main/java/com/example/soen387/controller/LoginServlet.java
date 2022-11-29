@@ -29,18 +29,11 @@ public class LoginServlet extends HttpServlet {
         String error_msg = "<div class=\"alert alert-danger\" role=\"alert\">Oops! Something went wrong.</div>";
 
         // Create User with input variables
-        Person login_user = new Person(username, password);
-
-        // Create Data Access Object
-        PersonDao personDao = new PersonDao();
-
-        // Insert User data into the database
-        String login_result = personDao.loginPerson(login_user);
-
+        Person login_person = new Person(username, password);
         // Session
         HttpSession session = request.getSession();
 
-        switch (login_result){
+        switch (login_person.loginPerson()){
             case "username_err":
                 request.setAttribute("username_err", username_err);
                 request.getRequestDispatcher("view/index.jsp").forward(request, response);

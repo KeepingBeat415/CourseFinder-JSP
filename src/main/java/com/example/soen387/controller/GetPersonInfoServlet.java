@@ -20,9 +20,8 @@ public class GetPersonInfoServlet extends HttpServlet {
         String username = (String) session.getAttribute("username");
 
         Person person = new Person();
-        person = person.findByUsername(username);
 
-        request.setAttribute("person_info", person);
+        request.setAttribute("person_info", person.findByUsername(username));
         request.getRequestDispatcher("/view/admin/admin_profile.jsp").forward(request, response);
     }
 
