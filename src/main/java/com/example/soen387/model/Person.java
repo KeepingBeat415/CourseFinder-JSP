@@ -1,8 +1,20 @@
 package com.example.soen387.model;
+import com.example.soen387.dao.PersonDao;
 
-public class User {
+import javax.persistence.*;
+import java.util.concurrent.locks.ReentrantLock;
 
+@Entity
+@Table(name = "Users")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="user_type",
+        discriminatorType = DiscriminatorType.STRING)
+public class Person {
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+
     private String username;
     private String password;
     private String first_name;
@@ -13,8 +25,17 @@ public class User {
     private String DOB;
     private String user_type;
 
+    private static final ReentrantLock register_lock = new ReentrantLock();
+    // Create Data Access Object
+    private static final PersonDao personDao = new PersonDao();
+
+    // Default Constructor
+    public Person(){
+        this(null,null,null,null,null,null,null,null,null);
+    }
+
     // For register new user
-    public User(String username, String password, String first_name, String last_name, String address, String email, String phone_number, String DOB, String user_type){
+    public Person(String username, String password, String first_name, String last_name, String address, String email, String phone_number, String DOB, String user_type){
         this.username = username;
         this.password = password;
         this.first_name = first_name;
@@ -26,18 +47,19 @@ public class User {
         this.user_type = user_type;
     }
     // For Login
-    public User(String username, String password){
+    public Person(String username, String password){
         this.username = username;
         this.password = password;
     }
-    // For search course 
-    public User(int id, String first_name, String last_name, String phone_number, String email){
+    // For search course
+    public Person(int id, String first_name, String last_name, String phone_number, String email){
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone_number = phone_number;
         this.email = email;
     }
+
     public int getId() {
         return id;
     }
@@ -81,6 +103,7 @@ public class User {
     public void setId(int id) {
         this.id = id;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
@@ -116,5 +139,35 @@ public class User {
     public void setAddress(String address) {
         this.address = address;
     }
-}
 
+    public String loginPerson(){
+       return personDao.loginPerson(this);
+    }
+
+    public String createPerson(){
+
+        register_lock.lock();
+        String userRegistered = "";
+
+        try{
+            // Insert User data into the database
+            userRegistered = personDao.registerUser(this);
+        }
+        finally {
+            register_lock.unlock();
+        }
+        return userRegistered;
+    }
+
+    public Person findByUsername(String username){
+        return personDao.findPersonInfo(username);
+    }
+
+    public String updatePerson(){
+        return personDao.updatePersonInfo(this);
+    }
+
+    public boolean deletePerson(String username){
+        return personDao.deletePerson(username);
+    }
+}

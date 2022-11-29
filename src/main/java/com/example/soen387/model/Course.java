@@ -1,5 +1,11 @@
 package com.example.soen387.model;
 
+import com.example.soen387.dao.CourseDao;
+import com.example.soen387.dao.PersonDao;
+
+import java.util.ArrayList;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Course {
     private int id;
     private String code;
@@ -11,6 +17,36 @@ public class Course {
     private String room;
     private String start_date;
     private String end_date;
+
+    private static final ReentrantLock create_course_lock = new ReentrantLock();
+    private static final CourseDao courseDao = new CourseDao();
+
+
+    public Course(){
+        this.id = -1;
+        this.code = null;
+        this.title = null;
+        this.semester = null;
+        this.days = null;
+        this.time = null;
+        this.instructor = null;
+        this.room = null;
+        this.start_date = null;
+        this.end_date = null;
+    }
+
+    public Course(String code, String title, String semester, String days, String time, String instructor, String room, String start_date, String end_date) {
+
+        this.code = code;
+        this.title = title;
+        this.semester = semester;
+        this.days = days;
+        this.time = time;
+        this.instructor = instructor;
+        this.room = room;
+        this.start_date = start_date;
+        this.end_date = end_date;
+    }
 
 
     //For add and delete purpose
@@ -132,5 +168,25 @@ public class Course {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public boolean createCourse(){
+
+        create_course_lock.lock();
+        try{
+            // Insert Course data into the database
+            return courseDao.createCourse(this);
+        }
+        finally {
+            create_course_lock.unlock();
+        }
+    }
+
+    public ArrayList<Course> searchCourseByCode(String code){
+        return courseDao.searchCourseByCode(code);
+    }
+
+    public boolean isCourseExisted(String code){
+        return courseDao.isCourseExisted(code);
     }
 }

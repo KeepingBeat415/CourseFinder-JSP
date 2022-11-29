@@ -1,8 +1,9 @@
 package com.example.soen387.controller;
 
 import com.example.soen387.dao.CourseDao;
-import com.example.soen387.dao.UserDao;
-import com.example.soen387.model.User;
+import com.example.soen387.dao.PersonDao;
+import com.example.soen387.model.Course;
+import com.example.soen387.model.Person;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -28,21 +29,19 @@ public class SearchCourseServlet extends HttpServlet {
         String student_not_enrolled = "<div class=\"alert alert-secondary\" style=\"position: absolute; margin-top: 60px;\" role=\"alert\">" +
                 "Oops! No student enroll " + course_code + " yet.</div>";
 
-        CourseDao courseDao = new CourseDao();
-
-        boolean is_course_existed = courseDao.isCourseExisted(course_code);
+        Course course = new Course();
 
         // checking whether search course existed
-        if(!is_course_existed){
+        if(!course.isCourseExisted(course_code)){
             request.setAttribute("course_not_existed", course_not_existed);
             request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
         }else{
             // Create Data Access Object
-            UserDao userDao = new UserDao();
+            PersonDao personDao = new PersonDao();
 
-            ArrayList<User> user_list = userDao.searchCourse(course_code);
+            ArrayList<Person> person_list = personDao.searchCourse(course_code);
 
-            if(user_list.isEmpty()){
+            if(person_list.isEmpty()){
                 request.setAttribute("student_not_enrolled", student_not_enrolled);
                 request.getRequestDispatcher("view/admin/admin_home.jsp").forward(request, response);
             }
@@ -56,13 +55,13 @@ public class SearchCourseServlet extends HttpServlet {
                         "<th scope=\"col\">Email</th>" +
                         "</tr>" +
                         "</thead>";
-                for(User user : user_list){
+                for(Person person : person_list){
                     result += "<tbody>" +
                             "<tr>" +
-                            "<td>" + user.getId() + "</td>" +
-                            "<td>" + user.getFirst_name() + " " + user.getLast_name() + "</td>" +
-                            "<td>" + user.getPhone_number() + "</td>" +
-                            "<td>" + user.getPhone_number() + "</td>" +
+                            "<td>" + person.getId() + "</td>" +
+                            "<td>" + person.getFirst_name() + " " + person.getLast_name() + "</td>" +
+                            "<td>" + person.getPhone_number() + "</td>" +
+                            "<td>" + person.getEmail() + "</td>" +
                             "</tr>" +
                             "</tbody>";
                 }
