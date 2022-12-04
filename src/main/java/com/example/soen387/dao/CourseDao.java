@@ -107,7 +107,6 @@ public class CourseDao {
 
         try {
             conn = DBConnection.getConnection();
-
             String query = "INSERT INTO Course (code, title, semester, days, time, instructor, room, start_date, end_date) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             preparedStatement = conn.prepareStatement(query);
@@ -120,6 +119,39 @@ public class CourseDao {
             preparedStatement.setString(7, course.getRoom());
             preparedStatement.setString(8, course.getStart_date());
             preparedStatement.setString(9, course.getEnd_date());
+
+            int count = preparedStatement.executeUpdate();
+
+            if (count != 0) {
+                return true;
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateCourse(Course course) {
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+            conn = DBConnection.getConnection();
+            String query = "UPDATE Course SET title=?, semester=?, days=?, time=?, instructor=?, room=?, start_date=?, end_date=? WHERE code=?";
+
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(9, course.getCode());
+            preparedStatement.setString(1, course.getTitle());
+            preparedStatement.setString(2, course.getSemester());
+            preparedStatement.setString(3, course.getDays());
+            preparedStatement.setString(4, course.getTime());
+            preparedStatement.setString(5, course.getInstructor());
+            preparedStatement.setString(6, course.getRoom());
+            preparedStatement.setString(7, course.getStart_date());
+            preparedStatement.setString(8, course.getEnd_date());
 
             int count = preparedStatement.executeUpdate();
 

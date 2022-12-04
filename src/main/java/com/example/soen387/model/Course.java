@@ -171,13 +171,22 @@ public class Course {
     }
 
     public boolean createCourse(){
-
         create_course_lock.lock();
-        try{
+        try {
             // Insert Course data into the database
             return courseDao.createCourse(this);
         }
         finally {
+            create_course_lock.unlock();
+        }
+    }
+
+    public boolean updateCourse() {
+        create_course_lock.lock();
+        try {
+            // Update Course data
+            return courseDao.updateCourse(this);
+        } finally {
             create_course_lock.unlock();
         }
     }
