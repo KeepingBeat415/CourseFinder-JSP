@@ -26,7 +26,6 @@ public class CreateCourseServlet extends HttpServlet {
                 "<div class='alert alert-success' role='alert' style='text-align: center;'>Course created successfully.</div>" +
                 "</div>" +
                 "</div>";
-        ;
         String error_msg = "<div class='form-row'>" +
                 "<div class='form-group col-md-12'>" +
                 "<div class='alert alert-danger' role='alert' style='text-align: center;'>Oops! Something went wrong. Please try again later.</div>" +

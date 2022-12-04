@@ -22,10 +22,9 @@ public class UpdateCourseServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String success_msg = "<div class='form-row'>" +
                 "<div class='form-group col-md-12'>" +
-                "<div class='alert alert-success' role='alert' style='text-align: center;'>Course created successfully.</div>" +
+                "<div class='alert alert-success' role='alert' style='text-align: center;'>Course modified successfully.</div>" +
                 "</div>" +
                 "</div>";
-        ;
         String error_msg = "<div class='form-row'>" +
                 "<div class='form-group col-md-12'>" +
                 "<div class='alert alert-danger' role='alert' style='text-align: center;'>Oops! Something went wrong. Please try again later.</div>" +
@@ -49,6 +48,14 @@ public class UpdateCourseServlet extends HttpServlet {
         } else {
             req.setAttribute("error_msg", error_msg);
         }
+        req.setAttribute("code", code);
+        req.setAttribute("title", title);
+        req.setAttribute("semester", semester);
+        req.setAttribute("days", days);
+        req.setAttribute("time", time);
+        req.setAttribute("instructor", instructor);
+        req.setAttribute("room", room);
+
         req.getRequestDispatcher("view/admin/course_modify.jsp").forward(req, resp);
     }
 }
