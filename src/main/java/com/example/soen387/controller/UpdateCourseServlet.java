@@ -9,9 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CreateCourseServlet", value = "/CreateCourseServlet")
+@WebServlet(name = "UpdateCourseServlet", value = "/UpdateCourseServlet")
 
-public class CreateCourseServlet extends HttpServlet {
+public class UpdateCourseServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -20,10 +20,9 @@ public class CreateCourseServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String success_msg = "<div class='form-row'>" +
                 "<div class='form-group col-md-12'>" +
-                "<div class='alert alert-success' role='alert' style='text-align: center;'>Course created successfully.</div>" +
+                "<div class='alert alert-success' role='alert' style='text-align: center;'>Course modified successfully.</div>" +
                 "</div>" +
                 "</div>";
         String error_msg = "<div class='form-row'>" +
@@ -42,14 +41,21 @@ public class CreateCourseServlet extends HttpServlet {
 
         Course course = new Course(code, title, semester, days, time, instructor, room);
 
-        boolean create_course_result = course.createCourse();
+        boolean update_course_result = course.updateCourse();
 
-        if (create_course_result) {
+        if (update_course_result) {
             req.setAttribute("success_msg", success_msg);
-            req.getRequestDispatcher("view/admin/course_create.jsp").forward(req, resp);
         } else {
             req.setAttribute("error_msg", error_msg);
-            req.getRequestDispatcher("view/admin/course_create.jsp").forward(req, resp);
         }
+        req.setAttribute("code", code);
+        req.setAttribute("title", title);
+        req.setAttribute("semester", semester);
+        req.setAttribute("days", days);
+        req.setAttribute("time", time);
+        req.setAttribute("instructor", instructor);
+        req.setAttribute("room", room);
+
+        req.getRequestDispatcher("view/admin/course_modify.jsp").forward(req, resp);
     }
 }

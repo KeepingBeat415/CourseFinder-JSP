@@ -49,6 +49,24 @@ function validate_search_course() {
   }
 }
 
+function validate_search_course_info() {
+  let course_code = document.getElementById("search_course_info").value;
+
+  if (!/^([A-Z]{3,4})-(\d{3,4})$/.test(course_code)) {
+    document.getElementById("invalidate_course_info_alert").style.color = "red";
+    document.getElementById("invalidate_course_info_alert").innerHTML =
+      "Should be in the form SOEN-387, MANA-2257, etc.";
+    document.getElementById("search_course_info_submit").disabled = true;
+    document.getElementById("search_course_info_submit").style.opacity = 0.4;
+  } else {
+    document.getElementById("invalidate_course_info_alert").style.color =
+      "white";
+    document.getElementById("invalidate_course_info_alert").innerHTML = "";
+    document.getElementById("search_course_info_submit").disabled = false;
+    document.getElementById("search_course_info_submit").style.opacity = 1;
+  }
+}
+
 function validate_username() {
   let username = document.getElementById("username").value;
   if (/\s/g.test(username)) {

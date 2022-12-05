@@ -41,6 +41,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="${pageContext.request.contextPath}/view/admin/admin_home.jsp">Home</a></li>
                 <li><a href="${pageContext.request.contextPath}/view/admin/course_create.jsp">Course</a></li>
+                <li><a href="${pageContext.request.contextPath}/GetPersonInfoServlet">Profile</a></li>
                 <li><a href="${pageContext.request.contextPath}/view/logout.jsp">Logout</a></li>
             </ul>
         </div>
