@@ -126,7 +126,7 @@
                         <td class="text-center">${course.days} - ${course.time}</td>
                         <td class="text-center">${course.room}</td>
                         <td>
-                            <form action="${pageContext.request.contextPath}/EditCourseAdminServlet" method="get">
+                            <form action="<%= request.getContextPath() %>/EditCourseAdminServlet" method="get">
                                 <input type="hidden" name="code" value=${course.code}>
                                 <button class="btn btn-primary btn-sm">Edit</button>
                             </form>
