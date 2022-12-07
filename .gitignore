@@ -10,6 +10,7 @@ target/
 .idea/compiler.xml
 .idea/libraries/
 .idea/runConfigurations.xml
+.idea/artifacts/
 out/artifacts/
 *.iws
 *.iml
