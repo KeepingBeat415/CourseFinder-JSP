@@ -6,9 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<%@include file="admin_header.jsp"%>
+<%@include file="admin_header.jsp" %>
 
 <div class="container theme-showcase" role="main">
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -18,10 +18,13 @@
             <h3>Course Enrolled Students:</h3>
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <input type="search" class="form-control" name="course_code" placeholder="Search by Course Code..." id="search_course" onkeyup="validate_search_course()" required>
+                    <input type="search" class="form-control" name="course_code" placeholder="Search by Course Code..."
+                           id="search_course" onkeyup="validate_search_course()" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <button class="btn btn-primary" type="submit" name="search_course" id="search_course_submit">Submit</button>
+                    <button class="btn btn-primary" type="submit" name="search_course" id="search_course_submit">
+                        Submit
+                    </button>
                 </div>
             </div>
             <div class="form-row">
@@ -51,10 +54,13 @@
             <h3>Student Information:</h3>
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <input type="search" class="form-control" name="student_id" placeholder="Search by Student ID..." id="search_student" onkeyup="validate_search_student()" required>
+                    <input type="search" class="form-control" name="student_id" placeholder="Search by Student ID..."
+                           id="search_student" onkeyup="validate_search_student()" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <button class="btn btn-primary" type="submit" name="search_student" id="search_student_submit">Submit</button>
+                    <button class="btn btn-primary" type="submit" name="search_student" id="search_student_submit">
+                        Submit
+                    </button>
                 </div>
             </div>
             <div class="form-row">
@@ -88,10 +94,14 @@
             <h3>Course Information:</h3>
             <div class="form-row">
                 <div class="form-group col-md-8">
-                    <input type="search" class="form-control" name="course_info_code" placeholder="Search by Course Code..." id="search_course_info" onkeyup="validate_search_course_info()" required>
+                    <input type="search" class="form-control" name="course_info_code"
+                           placeholder="Search by Course Code..." id="search_course_info"
+                           onkeyup="validate_search_course_info()" required>
                 </div>
                 <div class="form-group col-md-4">
-                    <button class="btn btn-primary" type="submit" name="search_course" id="search_course_info_submit">Submit</button>
+                    <button class="btn btn-primary" type="submit" name="search_course" id="search_course_info_submit">
+                        Submit
+                    </button>
                 </div>
             </div>
             <div class="form-row">
@@ -103,6 +113,14 @@
 
         <c:if test="${requestScope.course_info_not_existed != null}">
             <c:out value="${requestScope.course_info_not_existed}" escapeXml="false"/>
+        </c:if>
+
+        <c:if test="${requestScope.c_error_msg != null}">
+            <c:out value="${requestScope.c_error_msg}" escapeXml="false"/>
+        </c:if>
+
+        <c:if test="${requestScope.c_success_msg != null}">
+            <c:out value="${requestScope.c_success_msg}" escapeXml="false"/>
         </c:if>
 
         <c:if test="${requestScope.course_info_list != null}">
@@ -132,7 +150,10 @@
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-danger btn-sm">Delete</button>
+                            <form action="<%= request.getContextPath()%>/DeleteCourseServlet" method="get">
+                                <input type="hidden" name="code" value=${course.code}>
+                                <button class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -145,4 +166,4 @@
 
 </div>
 
-<%@include file="admin_footer.jsp"%>
+<%@include file="admin_footer.jsp" %>

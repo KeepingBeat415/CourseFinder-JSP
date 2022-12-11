@@ -198,4 +198,5 @@ public class Course {
     public boolean isCourseExisted(String code){
         return courseDao.isCourseExisted(code);
     }
+    public boolean deleteCourse(String course_code){return courseDao.deleteCourse(course_code); }
 }

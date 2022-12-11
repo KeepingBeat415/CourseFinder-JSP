@@ -166,4 +166,32 @@ public class CourseDao {
         }
         return false;
     }
+
+    public boolean deleteCourse(String course_code){
+
+        Connection conn = null;
+        PreparedStatement preparedStatement = null;
+
+        try {
+
+            conn = DBConnection.getConnection();
+
+            String query = "DELETE FROM Course WHERE code = ?";
+            // Prepared SQL Statement
+            preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setString(1, course_code);
+
+            int count = preparedStatement.executeUpdate();
+
+            if (count != 0) {
+                return true;
+            }
+
+            DBConnection.closeConnection();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
